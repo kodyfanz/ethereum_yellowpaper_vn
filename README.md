@@ -4,13 +4,13 @@
 [![Gitter](https://badges.gitter.im/ethereum/yellowpaper.svg)](https://gitter.im/ethereum/yellowpaper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![GitPOAP Badge](https://public-api.gitpoap.io/v1/repo/ethereum/yellowpaper/badge)](https://www.gitpoap.io/gh/ethereum/yellowpaper)
 
-Giấy vàng (Yellow Paper) là một định nghĩa chính thức của giao thức Ethereum, ban đầu là Gavin Wood, hiện được duy trì bởi Nick Savers và với sự đóng góp từ nhiều người trên thế giới.
+Giấy vàng (Yellow Paper) là một định nghĩa chính thức của giao thức Ethereum, được khởi đầu bởi Gavin Wood, hiện được duy trì bởi Nick Savers và với sự đóng góp từ nhiều người trên thế giới.
 
-Đây là một công việc văn hóa miễn phí, được cấp phép theo phiên bản Creative Commons Attribution Share-Olike (CC-by-SA) phiên bản 4.0.
+Đây là một tác phẩm văn hóa tự do, được cấp phép theo phiên bản Creative Commons Attribution Share-Olike (CC-by-SA) phiên bản 4.0.
 
 ## Kho lưu trữ hiện đã lỗi thời
 
-Giấy vàng đã lỗi thời. Nó phản ánh đặc tả Ethereum cho đến bản nâng cấp mạng [Paris](https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md) hợp nhất ("the merge"), được kích hoạt trên ethereum mainnet tại khối `15_537_394` (Tháng 9 2022). 
+Giấy vàng đã lỗi thời. Nó phản ánh đặc tả Ethereum cho đến bản nâng cấp [Paris](https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md) hợp nhất ("the merge"), được kích hoạt trên ethereum mainnet tại khối `15_537_394` (Tháng 9 2022). 
 
 Nó **không** chứa các thay đổi được giới thiệu trong bất kỳ bản nâng cấp sau khi hợp nhất. 
 
@@ -31,7 +31,7 @@ git clone https://github.com/kodyfanz/ethereum_yellowpaper_vn.git
 cd ethereum_yellowpaper_vn
 ./build.sh
 ```
-Điều này sẽ tạo ra một phiên bản PDF của Yellow Paper Tiếng Việt. Sau khi xây dựng, bạn cũng có thể sử dụng các công cụ `pdflatex` iêu chuẩn để biên dịch/xem trước, như http://latex.informatik.uni-halle.de/latex-online/latex.php.
+Điều này sẽ tạo ra một phiên bản PDF của Yellow Paper Tiếng Việt. Sau khi xây dựng, bạn cũng có thể sử dụng các công cụ `pdflatex` tiêu chuẩn để biên dịch/xem trước, như http://latex.informatik.uni-halle.de/latex-online/latex.php.
 
 ## Lời khuyên về chỉnh sửa
 
@@ -45,4 +45,4 @@ Các phiên bản giao thức trước được liệt kê trong [BRANCHES.md](.
 - [English](https://github.com/ethereum/yellowpaper) phiên bản gốc của Gavin Wood, hiện được Nick Savers duy trì và với sự đóng góp từ nhiều người trên thế giới.
 - [Chinese](https://github.com/yuange1024/ethereum_yellowpaper) được dịch bởi YuanGe và GaoTianlu.
 - [French](https://github.com/asseth/yellowpaper) được dịch bởi Asseth (checkout sang nhánh 'french').
-- [Vietnamese](https://github.com/kodyfanz/ethereum_yellowpaper_vn) được dịch bởi Kody Fanz.
+- [Vietnamese](https://github.com/kodyfanz/ethereum_yellowpaper_vn) được dịch bởi Kody Fanz (checkout sang nhánh 'vietnamese').
