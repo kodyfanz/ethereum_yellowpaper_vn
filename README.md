@@ -33,7 +33,7 @@ cd ethereum_yellowpaper_vn
 ```
 Điều này sẽ tạo ra một phiên bản PDF của Yellow Paper Tiếng Việt. Sau khi xây dựng, bạn cũng có thể sử dụng các công cụ `pdflatex` tiêu chuẩn để biên dịch/xem trước, như http://latex.informatik.uni-halle.de/latex-online/latex.php.
 
-## Lời khuyên về chỉnh sửa
+## Gợi ý về chỉnh sửa
 
 Bạn có thể sử dụng [TeX Stack Exchange](https://tex.stackexchange.com/); https://en.wikibooks.org/wiki/LaTeX/ (vd: [Bibliography Management](https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management) và [Hyperlinks](https://en.wikibooks.org/wiki/LaTeX/Hyperlinks)); và [BibTeX editor](http://truben.no/latex/bibtex/).
 
