@@ -42,7 +42,7 @@ Bạn có thể sử dụng [TeX Stack Exchange](https://tex.stackexchange.com/)
 Các phiên bản giao thức trước được liệt kê trong [BRANCHES.md](./BRANCHES.md).
 
 ### Các phiên bản ngôn ngữ khác
-- [English](https://github.com/ethereum/yellowpaper) phiên bản gốc của Gavin Wood, hiện được Nick Savers duy trì và với sự đóng góp từ nhiều người trên thế giới.
+- [English](https://github.com/ethereum/yellowpaper) bản gốc của Gavin Wood, hiện được Nick Savers duy trì và sự đóng góp từ nhiều người trên thế giới.
 - [Chinese](https://github.com/yuange1024/ethereum_yellowpaper) được dịch bởi YuanGe và GaoTianlu.
 - [French](https://github.com/asseth/yellowpaper) được dịch bởi Asseth (checkout sang nhánh 'french').
 - [Vietnamese](https://github.com/kodyfanz/ethereum_yellowpaper_vn) được dịch bởi Kody Fanz (checkout sang nhánh 'vietnamese').
