@@ -6,4 +6,12 @@ Paper.log
 Paper.out
 Paper.pdf
 Version.tex
-
+Paper_*.aux
+Paper_*.bbl
+Paper_*.blg
+Paper_*.log
+Paper_*.out
+Paper_*.fls
+Paper_*.fdb*
+Paper_*.synctex.gz
+build
