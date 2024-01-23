@@ -29,7 +29,7 @@ Một lựa chọn khác là chỉnh sửa tệp `tex` một cách riêng biệt
 ```
 git clone https://github.com/kodyfanz/ethereum_yellowpaper_vn.git
 cd ethereum_yellowpaper_vn
-./build.sh
+./build_vn.sh
 ```
 Điều này sẽ tạo ra một phiên bản PDF của Yellow Paper Tiếng Việt. Sau khi xây dựng, bạn cũng có thể sử dụng các công cụ `pdflatex` tiêu chuẩn để biên dịch/xem trước, như http://latex.informatik.uni-halle.de/latex-online/latex.php.
 
