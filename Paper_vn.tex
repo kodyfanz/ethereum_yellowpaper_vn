@@ -261,7 +261,7 @@ Trạng thái tài khoản, $\boldsymbol{\sigma}[a]$, bao gồm bốn trường 
 \item[nonce] \linkdest{account_nonce}Một giá trị vô hướng (scalar) bằng số lần giao dịch được gửi từ địa chỉ này hoặc, trong trường hợp của các tài khoản có mã (code) liên quan, số lần tạo hợp đồng bởi tài khoản này. Đối với tài khoản có địa chỉ $a$ trong trạng thái $\boldsymbol{\sigma}$, điều này sẽ được biểu diễn là $\boldsymbol{\sigma}[a]_{\mathrm{n}}$.
 \item[balance] Giá trị vô hướng bằng số Wei được sở hữu bởi địa chỉ này. Được biểu diễn là $\boldsymbol{\sigma}[a]_{\mathrm{b}}$.
 \item[storageRoot] Một băm 256-bit của nút gốc của cây Merkle Patricia mã hóa nội dung lưu trữ của tài khoản (một ánh xạ giữa các giá trị số nguyên 256-bit), được mã hóa vào trie như một ánh xạ từ băm Keccak 256-bit của các khóa số nguyên 256-bit đến các giá trị số nguyên 256-bit được mã hóa bằng RLP. Băm được biểu diễn là $\boldsymbol{\sigma}[a]_{\mathrm{s}}$.
-\item[codeHash] Băm của mã (code) EVM của tài khoản này—đây là mã được thực thi nếu địa chỉ này nhận một cuộc gọi thông điệp (message call). Tất cả các đoạn mã như vậy được chứa trong cơ sở dữ liệu trạng thái dưới các băm tương ứng của chúng để có thể được gọi lại sau này. Băm này được biểu diễn là $\boldsymbol{\sigma}[a]_{\mathrm{c}}$, và mã (code) có thể được biểu diễn là $\mathbf{b}$, do đó $\texttt{KEC}(\mathbf{b}) = \boldsymbol{\sigma}[a]_{\mathrm{c}}$.
+\item[codeHash] Băm của mã (code) EVM của tài khoản này—đây là mã được thực thi nếu địa chỉ này nhận một cuộc Gọi tin nhắn (message call). Tất cả các đoạn mã như vậy được chứa trong cơ sở dữ liệu trạng thái dưới các băm tương ứng của chúng để có thể được gọi lại sau này. Băm này được biểu diễn là $\boldsymbol{\sigma}[a]_{\mathrm{c}}$, và mã (code) có thể được biểu diễn là $\mathbf{b}$, do đó $\texttt{KEC}(\mathbf{b}) = \boldsymbol{\sigma}[a]_{\mathrm{c}}$.
 \end{description}
 
 Vì chúng ta thường muốn tham chiếu không phải đến băm gốc của trie mà đến bộ cặp khóa/giá trị cơ bản được lưu trữ bên trong, chúng ta định nghĩa một tương đương thuận tiện:
@@ -1177,7 +1177,7 @@ Vì vậy, $X$ được lặp (đệ quy ở đây, nhưng thông thường các
 \subsubsection{Trạng Thái Máy}
 Trạng thái máy $\boldsymbol{\mu}$ được định nghĩa như là bộ (tuple) \((g, pc, \mathbf{m}, i, \mathbf{s})\) là gas sẵn có, bộ đếm chương trình $pc \in \mathbb{N}_{256}$, nội dung bộ nhớ, số lượng từ (word) hoạt động trong bộ nhớ (đếm liên tục từ vị trí 0), và nội dung ngăn xếp. Nội dung bộ nhớ $\boldsymbol{\mu}_{\mathbf{m}}$ là một loạt các số 0 có kích thước $2^{256}$.
 
-Để dễ đọc, các chỉ thị ghi nhớ, viết bằng chữ hoa nhỏ (vd: {\small ADD}), nên được hiểu như là các giá trị số tương ứng của chúng; bảng đầy đủ của các chỉ thị và chi tiết của chúng được cho trong Phụ Lục \ref{app:vm}.
+Để dễ đọc, các chỉ thị ghi nhớ (mnemonic), viết bằng chữ hoa nhỏ (vd: {\small ADD}), nên được hiểu như là các giá trị số tương ứng của chúng; bảng đầy đủ của các chỉ thị và chi tiết của chúng được cho trong Phụ Lục \ref{app:vm}.
 
 Đối với mục đích định nghĩa $Z$, $H$, và $O$, chúng ta định nghĩa $w$ là hoạt động hiện tại sẽ được thực thi:
 \begin{equation}\label{eq:currentoperation}
@@ -2123,7 +2123,7 @@ $W_{\mathrm{call}}$ = \{{\small CALL}, {\small CALLCODE}, {\small DELEGATECALL},
 
 $W_{\mathrm{extaccount}}$ = \{{\small BALANCE}, {\small EXTCODESIZE}, {\small EXTCODEHASH}\}
 
-Lưu ý rằng thành phần chi phí bộ nhớ, được đưa ra dưới dạng tích của $G_{\mathrm{memory}}$ và tối đa giữa 0 \& trần số của từ (words) để bộ nhớ trở nên lớn hơn số từ hiện tại, $\boldsymbol{\mu}_{\mathrm{i}}$, để tất cả các truy cập đều tham chiếu đến bộ nhớ hợp lệ, cho cả đọc và ghi. Những truy cập này phải là cho một số byte khác không.
+Lưu ý rằng thành phần chi phí bộ nhớ, được đưa ra dưới dạng tích của $G_{\mathrm{memory}}$ và tối đa giữa 0 \& trần số của từ (words) để bộ nhớ trở nên lớn hơn số lượng từ (words) hiện tại, $\boldsymbol{\mu}_{\mathrm{i}}$, để tất cả các truy cập đều tham chiếu đến bộ nhớ hợp lệ, cho cả đọc và ghi. Những truy cập này phải là cho một số lượng byte khác không.
 
 Việc tham chiếu đến một phạm vi có độ dài bằng không (ví dụ: cố gắng truyền nó như là phạm vi đầu vào của một CALL) không đòi hỏi mở rộng bộ nhớ về phía đầu phạm vi. $\boldsymbol{\mu}'_{\mathrm{i}}$ được định nghĩa là số từ (words) tối đa mới của bộ nhớ hoạt động (active); có các trường hợp đặc biệt là khi chúng không bằng nhau.
 
@@ -2263,7 +2263,7 @@ Dưới đây là các ngoại lệ khác nhau cho các quy tắc chuyển trạ
 \begin{tabu}{\usetabu{opcodes}}
 \toprule
 \multicolumn{5}{c}{\textbf{20s: KECCAK256}} \vspace{5pt} \\
-\textbf{Value} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Description} \vspace{5pt} \\
+\textbf{Giá trị} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Description} \vspace{5pt} \\
 0x20 & {\small KECCAK256} & 2 & 1 & Tính toán KECCAK-256 hash. \\
 &&&& $\boldsymbol{\mu}'_{\mathbf{s}}[0] \equiv \mathtt{KEC}(\boldsymbol{\mu}_{\mathbf{m}}[ \boldsymbol{\mu}_{\mathbf{s}}[0] \dots (\boldsymbol{\mu}_{\mathbf{s}}[0] + \boldsymbol{\mu}_{\mathbf{s}}[1] - 1) ])$ \\
 &&&& $\boldsymbol{\mu}'_{\mathrm{i}} \equiv M(\boldsymbol{\mu}_{\mathrm{i}}, \boldsymbol{\mu}_{\mathbf{s}}[0], \boldsymbol{\mu}_{\mathbf{s}}[1])$ \\
@@ -2508,7 +2508,7 @@ G_{\mathrm{sreset}} - G_{\mathrm{warmaccess}} & \text{nếu} \quad v_0 = v' \; \
 \begin{tabu}{\usetabu{opcodes}}
 \toprule
 \multicolumn{5}{c}{\textbf{60s \& 70s: Các Phép Toán Đẩy (Push)}} \vspace{5pt} \\
-\textbf{Value} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
+\textbf{Giá trị} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
 0x60 & {\small PUSH1} & 0 & 1 & Đặt một byte lên ngăn xếp. \\
 &&&& $\boldsymbol{\mu}'_{\mathbf{s}}[0] \equiv c(\boldsymbol{\mu}_{\mathrm{pc}} + 1)$ \\
 &&&& $\text{trong đó} \quad c(x) \equiv \begin{cases} I_{\mathbf{b}}[x] & \text{nếu} \quad x < \lVert I_{\mathbf{b}} \rVert \\ 0 & \text{ngược lại} \end{cases}$ \\
@@ -2534,7 +2534,7 @@ G_{\mathrm{sreset}} - G_{\mathrm{warmaccess}} & \text{nếu} \quad v_0 = v' \; \
 \begin{tabu}{\usetabu{opcodes}}
 \toprule
 \multicolumn{5}{c}{\textbf{80s: Các Phép Toán Nhân Bản (Duplication)}} \vspace{5pt} \\
-\textbf{Value} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
+\textbf{Giá trị} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
 0x80 & {\small DUP1} & 1 & 2 & Nhân bản mục 1 của ngăn xếp. \\
 &&&& $\boldsymbol{\mu}'_{\mathbf{s}}[0] \equiv \boldsymbol{\mu}_{\mathbf{s}}[0]$ \\
 \midrule
@@ -2552,7 +2552,7 @@ G_{\mathrm{sreset}} - G_{\mathrm{warmaccess}} & \text{nếu} \quad v_0 = v' \; \
 \begin{tabu}{\usetabu{opcodes}}
 \toprule
 \multicolumn{5}{c}{\textbf{90s: Các Phép Toán Trao Đổi (Exchange)}} \vspace{5pt} \\
-\textbf{Value} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
+\textbf{Giá trị} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
 0x90 & {\small SWAP1} & 2 & 2 & Trao đổi mục 1 và mục 2 của ngăn xếp. \\
 &&&& $\boldsymbol{\mu}'_{\mathbf{s}}[0] \equiv \boldsymbol{\mu}_{\mathbf{s}}[1]$ \\
 &&&& $\boldsymbol{\mu}'_{\mathbf{s}}[1] \equiv \boldsymbol{\mu}_{\mathbf{s}}[0]$ \\
@@ -2578,7 +2578,7 @@ G_{\mathrm{sreset}} - G_{\mathrm{warmaccess}} & \text{nếu} \quad v_0 = v' \; \
 \multicolumn{5}{l}{và để cập nhật bộ đếm tiêu thụ bộ nhớ:}\\
 \multicolumn{5}{l}{$\boldsymbol{\mu}'_{\mathrm{i}} \equiv M(\boldsymbol{\mu}_{\mathrm{i}}, \boldsymbol{\mu}_{\mathbf{s}}[0], \boldsymbol{\mu}_{\mathbf{s}}[1])$}\\
 \multicolumn{5}{l}{Dãy chủ đề của bản ghi, $\mathbf{t}$, thay đổi tùy thuộc vào số lượng chủ đề:}\vspace{5pt} \\
-\textbf{Value} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
+\textbf{Giá trị} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô Tả} \vspace{5pt} \\
 0xa0 & {\small LOG0} & 2 & 0 & Thêm bản ghi log không có chủ đề nào. \\
 &&&& $\mathbf{t} \equiv ()$ \\
 \midrule
@@ -2595,8 +2595,8 @@ G_{\mathrm{sreset}} - G_{\mathrm{warmaccess}} & \text{nếu} \quad v_0 = v' \; \
 
 \begin{tabu}{\usetabu{opcodes}}
 \toprule
-\multicolumn{5}{c}{\textbf{f0s: System operations}} \vspace{5pt} \\
-\textbf{Value} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Description} \vspace{5pt} \\
+\multicolumn{5}{c}{\textbf{f0s: Hoạt động hệ thống (System operations)}} \vspace{5pt} \\
+\textbf{Giá trị} & \textbf{Mnemonic} & $\delta$ & $\alpha$ & \textbf{Mô tả} \vspace{5pt} \\
 0xf0 & {\small CREATE} & 3 & 1 & Tạo một tài khoản mới với mã (code) được liên kết. \\
 &&&& $\mathbf{i} \equiv \boldsymbol{\mu}_{\mathbf{m}}[ \boldsymbol{\mu}_{\mathbf{s}}[1] \dots (\boldsymbol{\mu}_{\mathbf{s}}[1] + \boldsymbol{\mu}_{\mathbf{s}}[2] - 1) ]$ \\
 &&&& $\hyperlink{salt}{\zeta} \equiv \varnothing$ \\
@@ -2654,7 +2654,7 @@ G_{\mathrm{newaccount}} & \text{nếu} \quad \mathtt{DEAD}(\boldsymbol{\sigma}, 
 0 & \text{ngược lại}
 \end{cases}$ \\
 \midrule
-0xf2 & {\small CALLCODE} & 7 & 1 & Gọi thông điệp vào tài khoản này với mã nguồn của một tài khoản thay thế. \\
+0xf2 & {\small CALLCODE} & 7 & 1 & Gọi tin nhắn vào tài khoản này với mã nguồn của một tài khoản thay thế. \\
 &&&& Hoàn toàn tương đương với {\small CALL} ngoại trừ: \\
 &&&& $(\boldsymbol{\sigma}', g', A', x, \mathbf{o}) \equiv \begin{cases}\begin{array}{l}\Theta(\boldsymbol{\sigma}, A^*, I_{\mathrm{a}}, I_{\mathrm{o}}, I_{\mathrm{a}}, t, C_{\text{\tiny CALLGAS}}(\boldsymbol{\sigma},\boldsymbol{\mu},A), \\ \quad I_{\mathrm{p}}, \boldsymbol{\mu}_{\mathbf{s}}[2], \boldsymbol{\mu}_{\mathbf{s}}[2], \mathbf{i}, I_{\mathrm{e}} + 1, I_{\mathrm{w}})\end{array}
   & \begin{array}{l}\text{nếu} \quad \boldsymbol{\mu}_{\mathbf{s}}[2] \leqslant \boldsymbol{\sigma}[I_{\mathrm{a}}]_{\mathrm{b}} \;\wedge\\ \quad\quad{}I_{\mathrm{e}} < 1024\end{array} \\
@@ -2672,7 +2672,7 @@ G_{\mathrm{newaccount}} & \text{nếu} \quad \mathtt{DEAD}(\boldsymbol{\sigma}, 
 
 \begin{tabu}{\usetabu{opcodes}}
 \midrule
-0xf4 & {\small DELEGATECALL} & 6 & 1 & Gọi thông điệp vào tài khoản này với mã nguồn của một tài khoản thay thế, nhưng\\
+0xf4 & {\small DELEGATECALL} & 6 & 1 & Gọi tin nhắn vào tài khoản này với mã nguồn của một tài khoản thay thế, nhưng\\
 &&&& giữ các giá trị hiện tại của {\it người gửi} và {\it giá trị}. \\
 &&&& So với {\small CALL}, {\small DELEGATECALL} ít một tham số.\\
 &&&& Tham số bị bỏ qua là $\boldsymbol{\mu}_{\mathbf{s}}[2]$. Do đó, $\boldsymbol{\mu}_{\mathbf{s}}[3]$, $\boldsymbol{\mu}_{\mathbf{s}}[4]$, $\boldsymbol{\mu}_{\mathbf{s}}[5]$ và $\boldsymbol{\mu}_{\mathbf{s}}[6]$\\
@@ -2690,7 +2690,7 @@ G_{\mathrm{newaccount}} & \text{nếu} \quad \mathtt{DEAD}(\boldsymbol{\sigma}, 
 &&&& Hoàn toàn tương đương với {\small CREATE} ngoại trừ:\\
 &&&& Giá trị của salt $\zeta \equiv \boldsymbol{\mu}_{\mathbf{s}}[3]$.\\
 \midrule
-0xfa & {\small STATICCALL} & 6 & 1 & Gọi thông điệp tĩnh vào một tài khoản. \\
+0xfa & {\small STATICCALL} & 6 & 1 & Gọi tin nhắn tĩnh vào một tài khoản. \\
 &&&& Hoàn toàn tương đương với {\small CALL} ngoại trừ:\\
 &&&& Tham số $\boldsymbol{\mu}_{\mathbf{s}}[2]$ được thay thế bằng $0$. \\
 &&&& Các tham số sâu hơn $\boldsymbol{\mu}_{\mathbf{s}}[3]$, $\boldsymbol{\mu}_{\mathbf{s}}[4]$, $\boldsymbol{\mu}_{\mathbf{s}}[5]$ và $\boldsymbol{\mu}_{\mathbf{s}}[6]$ được thay thế lần lượt \\
