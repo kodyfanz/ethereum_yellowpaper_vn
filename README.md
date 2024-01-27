@@ -18,7 +18,9 @@ Một thay thế [Thông số kỹ thuật của lớp thực thi Python](https:
 
 ## Cách sử dụng
 
-Nếu bạn chỉ muốn đọc bài báo, phiên bản mới nhất thường có sẵn dưới dạng PDF tại https://ethereum.github.io/yellowpaper/paper.pdf. Nếu bạn thấy rằng các đường viền cho liên kết che mất nhiều văn bản khi xem PDF trong trình duyệt, bạn có thể tải xuống và mở xem nó bằng một ứng dụng xem PDF như Adobe Acrobat hoặc Evince, nơi các đường viền ít có khả năng hiển thị.
+Nếu bạn chỉ muốn đọc bài báo, phiên bản mới nhất thường có sẵn dưới dạng PDF trong cùng thư mục github này. Nếu bạn thấy rằng các đường viền cho liên kết che mất nhiều văn bản khi xem PDF trong trình duyệt, bạn có thể tải xuống và mở xem nó bằng một ứng dụng xem PDF như Adobe Acrobat hoặc Evince, nơi các đường viền ít có khả năng hiển thị.
+
+Bạn có thể tham khảo thêm một số diễn giải tại: <https://kodyfanz.github.io/ethereum_yellowpaper_explain_vn/>
 
 Tuy nhiên, nếu bạn muốn chỉnh sửa bài báo bằng Tiếng Việt và giúp hoàn thiện nó, hãy đọc tiếp. Bài báo đã được dịch Tiếng Việt được biểu diễn dưới dạng một tệp ``latex`` duy nhất là ``Paper_vn.tex``.  
 
