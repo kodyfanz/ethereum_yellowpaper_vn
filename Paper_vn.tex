@@ -1574,19 +1574,19 @@ f(t) & \equiv & \begin{cases} 2 & \text{nếu} \quad t \neq 0 \\ 0 & \text{ngư�
 Như vậy, nibble cao của byte đầu tiên chứa hai cờ hiệu; bit thấp nhất mã hóa tính chẵn lẻ của độ dài và bit thấp thứ hai mã hóa cờ $t$. Nibble thấp của byte đầu tiên là không (zero) trong trường hợp số lượng nibbles là chẵn và là nibble đầu tiên trong trường hợp số lượng nibbles là lẻ. Tất cả các nibble còn lại (bây giờ là số chẵn) khớp đúng với các byte còn lại.
 
 \section{Cây Merkle Patricia sửa đổi}\label{app:trie}\hypertarget{trie}{}
-Cây Merkle Patricia sửa đổi (trie) cung cấp một cấu trúc dữ liệu bền để ánh xạ giữa dữ liệu nhị phân có độ dài tùy ý (mảng byte). Nó được định nghĩa dưới dạng một cấu trúc dữ liệu có thể thay đổi để ánh xạ giữa các đoạn nhị phân 256 bit và dữ liệu nhị phân có độ dài tùy ý, thường được thực hiện dưới dạng một cơ sở dữ liệu. Lõi của trie, và yêu cầu duy nhất của nó trong kịch bản đặc tả giao thức, là cung cấp một giá trị duy nhất xác định một bộ cặp khóa-giá trị đã cho, có thể là một chuỗi 32 byte hoặc chuỗi byte trống. Để hiện thực giao thức một cách hiệu quả và hiệu quả, cách lưu trữ và duy trì cấu trúc của cây được để lại là một yếu tố cần xem xét khi triển khai.
+Cây Merkle Patricia sửa đổi (trie) cung cấp một cấu trúc dữ liệu bền để ánh xạ giữa dữ liệu nhị phân có độ dài tùy ý (các mảng byte). Nó được định nghĩa dưới dạng một cấu trúc dữ liệu có thể thay đổi để ánh xạ giữa các đoạn nhị phân 256 bit và dữ liệu nhị phân có độ dài tùy ý, thường được thực hiện dưới dạng một cơ sở dữ liệu. Lõi của trie, và yêu cầu duy nhất của nó trong kịch bản đặc tả giao thức, là cung cấp một giá trị duy nhất xác định một bộ cặp khóa-giá trị (key-value) đã cho, có thể là một dãy 32 byte hoặc dãy byte trống. Nó được xem xét khi triển khai để lưu trữ và duy trì cấu trúc của trie một cách hiệu quả và sự hiện thực hóa hiệu quả của giao thức.
 
-Hình thức, chúng ta giả sử giá trị đầu vào $\mathfrak{I}$, một tập chứa các cặp dãy byte có khóa duy nhất:
+Quy ước, chúng ta giả sử giá trị đầu vào $\mathfrak{I}$, một tập hợp chứa các cặp dãy byte có khóa (key) duy nhất:
 \begin{equation}
 \mathfrak{I} = \{ (\mathbf{k}_0 \in \mathbb{B}, \mathbf{v}_0 \in \mathbb{B}), (\mathbf{k}_1 \in \mathbb{B}, \mathbf{v}_1 \in \mathbb{B}), ... \}
 \end{equation}
 
-Khi xem xét một chuỗi như vậy, chúng ta sử dụng ký hiệu số học chung để tham chiếu đến khóa hoặc giá trị của một bộ, như sau:
+Khi xem xét một dãy như vậy, chúng ta sử dụng ký hiệu chỉ số dưới dạng số phổ biến để tham chiếu đến một bộ (tuple) khóa hoặc giá trị, như sau:
 \begin{equation}
 \forall I \in \mathfrak{I}: I \equiv (I_0, I_1)
 \end{equation}
 
-Bất kỳ loạt byte nào cũng có thể được xem là một loạt các nữa byte/4 bít (nibble), được đưa ra một ký hiệu đặc trưng cho endian; Ở đây chúng ta giả sử Big-Endian. Do đó:
+Bất kỳ loạt byte nào cũng có thể được trình bày là một loạt các nữa byte/4 bít (nibble), theo ghi chú kiểu endian cụ thể; Ở đây chúng ta giả sử Big-Endian. Do đó:
 \begin{eqnarray}
 y(\mathfrak{I}) & = & \{ (\mathbf{k}_0' \in \hyperlink{set_of_sequence_of_nibbles}{\mathbb{Y}}, \mathbf{v}_0 \in \mathbb{B}), (\mathbf{k}_1' \in \mathbb{Y}, \mathbf{v}_1 \in \mathbb{B}), ... \} \\
 \forall n: \quad \forall i < 2\lVert\mathbf{k}_{n}\rVert: \quad \mathbf{k}_{n}'[i] & \equiv &
@@ -1601,7 +1601,7 @@ Chúng ta định nghĩa hàm $\texttt{TRIE}$, mà khi đánh giá sẽ trả v�
 \texttt{TRIE}(\mathfrak{I}) \equiv \texttt{KEC}\big(\texttt{RLP} (c(\mathfrak{I}, 0))\big)
 \end{equation}
 
-Chúng ta cũng giả định có một hàm $n$, là hàm giới hạn số nút của cây trie. Khi tạo một nút, chúng ta sử dụng RLP để mã hóa cấu trúc. Nhằm giảm độ phức tạp về lưu trữ, chúng ta lưu trữ các nút mà RLP tạo ra có độ dài ít hơn 32 byte trực tiếp; đối với những nút có kích thước lớn hơn, chúng ta khẳng định sự biết trước về dãy byte mà băm Keccak-256 của nó đánh giá đến tham chiếu của chúng ta. Do đó, chúng ta định nghĩa dựa trên $c$, hàm tạo nút:
+Chúng ta cũng giả định có một hàm $n$, là hàm giới hạn số nút của cây trie. Khi tạo một nút, chúng ta sử dụng RLP để mã hóa cấu trúc. Nhằm giảm độ phức tạp về lưu trữ, chúng ta lưu trữ các nút mà RLP tạo ra có độ dài ít hơn 32 byte một cách trực tiếp; đối với những nút có kích thước lớn hơn, chúng ta khẳng định sự biết trước về dãy byte mà hash Keccak-256 của nó đánh giá đến tham chiếu của chúng ta. Do đó, chúng ta định nghĩa dựa trên $c$, hàm tổ hợp nút:
 \begin{equation}
 n(\mathfrak{I}, i) \equiv \begin{cases}
 () \in \mathbb{B} & \text{nếu} \quad \mathfrak{I} = \varnothing \\
@@ -1610,17 +1610,17 @@ c(\mathfrak{I}, i) & \text{nếu} \quad \lVert \, \texttt{RLP} \big( c(\mathfrak
 \end{cases}
 \end{equation}
 
-Một cách tương tự như cây radix, khi trie được duyệt từ gốc đến lá, ta có thể xây dựng một cặp key-value duy nhất. Key được tích luỹ qua quá trình duyệt, thu thập một nibble duy nhất từ mỗi nút nhánh (giống như cây radix). Khác với cây radix, trong trường hợp nhiều key chia sẻ cùng một tiền tố hoặc trong trường hợp chỉ có một key có một hậu tố duy nhất, hai nút tối ưu hóa được cung cấp. Do đó, trong quá trình duyệt, có thể có thể lấy được nhiều nibble từ mỗi loại nút khác nhau, bao gồm nút mở rộng và lá. Có ba loại nút trong trie:
+Một cách tương tự như cây radix, khi trie được duyệt từ gốc đến lá, ta có thể xây dựng một cặp key-value duy nhất. Key được tích luỹ qua quá trình duyệt, thu thập một nibble duy nhất từ mỗi nút nhánh (giống như cây radix). Khác với cây radix, trong trường hợp nhiều key chia sẻ cùng một tiền tố hoặc trong trường hợp chỉ có một key có một hậu tố duy nhất thì hai nút tối ưu hóa được cung cấp. Do đó, trong quá trình duyệt, có thể có thể lấy được nhiều nibble từ mỗi loại nút khác nhau, bao gồm nút mở rộng và nút lá. Có ba loại nút trong trie:
 
 \begin{description}
-\item[Leaf (Lá):] Một cấu trúc hai mục, mục đầu tiên tương ứng với các nibble trong key chưa được tính đến bởi việc tích luỹ của keys và các nhánh đã được duyệt từ gốc. Phương pháp mã hóa hex-prefix được sử dụng và tham số thứ hai cho hàm phải là 1.
+\item[Leaf (Lá):] Một cấu trúc hai phần tử, trong đó phần tử đầu tiên tương ứng với các nibbles trong key mà chưa được tính đến bởi việc tích luỹ của keys và các nhánh duyệt từ gốc. Phương pháp mã hóa hex-prefix được sử dụng và tham số thứ hai cho hàm phải là 1.
 
-\item[Extension (Mở rộng):] Một cấu trúc hai mục, mục đầu tiên tương ứng với một chuỗi nibble có kích thước lớn hơn một, được chia sẻ bởi ít nhất hai key khác nhau sau khi tích lũy các nibble và nhánh khi duyệt từ gốc. Phương pháp mã hóa hex-prefix được sử dụng và tham số thứ hai cho hàm phải là 0.
+\item[Extension (Mở rộng):] Một cấu trúc hai phần tử, phần tử đầu tiên tương ứng với một loạt các nibbles có kích thước lớn hơn một, được chia sẻ bởi ít nhất hai key khác nhau sau khi tích lũy các keys của các nibbles và các keys của nhánh duyệt từ gốc. Phương pháp mã hóa hex-prefix được sử dụng và tham số thứ hai cho hàm phải là 0.
 
-\item[Branch (Nhánh):] Một cấu trúc 17 mục, trong đó 16 mục tương ứng với mỗi giá trị nibble có thể có cho các key tại thời điểm này trong quá trình duyệt nó. Mục thứ 17 được sử dụng trong trường hợp này là một nút kết thúc và do đó một key kết thúc tại điểm này trong quá trình duyệt nó.
+\item[Branch (Nhánh):] Một cấu trúc 17 phần tử, trong đó 16 phần tử đầu tiên tương ứng với mỗi giá trị nibble có thể có cho các key tại điểm này trong quá trình duyệt qua nó. Mục thứ 17 được sử dụng trong trường hợp này là một nút kết thúc (terminator node), và do đó một key kết thúc tại điểm này trong quá trình duyệt qua nó.
 \end{description}
 
-Một nhánh chỉ được sử dụng khi cần thiết; không có nút nhánh nào có thể tồn tại chỉ chứa một mục khác không. Chúng ta có thể định nghĩa cấu trúc này một cách chính thức bằng hàm sắp xếp cấu trúc $c$.
+Một nhánh chỉ được sử dụng khi cần thiết; không có nút nhánh nào có thể tồn tại chỉ chứa một mục khác không. Chúng ta có thể định nghĩa cấu trúc này một cách chính thức bằng hàm tổ hợp cấu trúc $c$.
 \begin{equation}
 c(\mathfrak{I}, i) \equiv \begin{cases}
  \big(\texttt{HP}(I_0[i .. (\lVert I_0\rVert - 1)], 1), I_1 \big) & \text{nếu} \quad \lVert \mathfrak{I} \rVert = 1 \quad \text{trong đó} \; \exists I: I \in \mathfrak{I} \\
