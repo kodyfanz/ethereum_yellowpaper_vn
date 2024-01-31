@@ -1523,18 +1523,18 @@ R_{\mathrm{b}}(\mathbf{x}) & \equiv & \begin{cases}
 (x_1, ..., x_n) \cdot (y_1, ..., y_m) & = & (x_1, ..., x_n, y_1, ..., y_m)
 \end{eqnarray}
 
-Vậy nên, $\mathtt{BE}$ là hàm mở rộng một giá trị số nguyên không âm thành một mảng byte big-endian có chiều dài tối thiểu và toán tử chấm thực hiện việc nối chuỗi.
+Vậy nên, $\mathtt{BE}$ là hàm mở rộng một giá trị số nguyên không âm thành một mảng byte big-endian có chiều dài tối thiểu và toán tử dấu chấm `.' thực hiện việc nối chuỗi.
 
 \hypertarget{RLP_serialisation_of_a_sequence_of_other_items_R__l_word_def}{}\linkdest{R__l}Nếu giá trị cần được chuỗi hóa là một chuỗi các mục khác nhau thì quá trình chuỗi hóa RLP có hai dạng:
 
 \begin{itemize}
-\item Nếu việc nối chuỗi hóa của mỗi mục chứa có độ dài ít hơn 56 byte, thì đầu ra bằng việc nối chuỗi hóa đó được tiếp theo bởi byte bằng với độ dài của mảng byte này cộng thêm 192.
-\item Ngược lại, đầu ra bằng việc nối chuỗi hóa, miễn là chúng có ít hơn $2^{64}$ byte, được tiếp theo bởi mảng byte có độ dài tối thiểu khi được giải thích như một số nguyên lớn với độ dài của mảng byte được nối chuỗi này, chính nó được tiếp theo bởi số byte cần thiết để mã hóa giá trị độ dài này một cách trung thực cộng thêm 247.
+\item Nếu \textit{chuỗi hóa đã nối (concatenated serialised)} của mỗi mục chứa có độ dài ít hơn 56 byte, thì đầu ra bằng \textit{chuỗi hóa đã nối} đó gắn tiền tố bởi byte có giá trị bằng với độ dài của mảng byte \textit{chuỗi hóa đã nối} này cộng thêm 192.
+\item Ngược lại, cho rằng chúng có ít hơn $2^{64}$ byte, đầu ra bằng \textit{chuỗi hóa đã nối} đó gắn tiền tố bởi giá trị chiều dài tối thiểu của mảng byte mà khi được biểu diễn như một big-endian là độ dài của mảng byte \textit{chuổi hóa đã nối} đầu vào, tiếp theo chính nó (chính tiền tố vừa nêu) lại được gắn thêm tiền tố bởi số byte cần thiết để mã hóa giá trị độ dài này một cách trung thực cộng thêm 247.
 \end{itemize}
 
-Chuỗi mà chuỗi hóa nối các mục đã được chuỗi hóa chứa $2^{64}$ byte hoặc nhiều hơn không thể được mã hóa. Ràng buộc này đảm bảo rằng byte đầu tiên của việc mã hóa không vượt quá 255 (ngược lại nó sẽ không phải là một byte).
+Dãy mà \textit{chuỗi hóa đã nối} các mục chứa $2^{64}$ byte hoặc nhiều hơn không thể được mã hóa. Ràng buộc này đảm bảo rằng byte đầu tiên của việc mã hóa không vượt quá 255 (ngược lại nó sẽ không phải là một byte).
 
-\hypertarget{RLP_serialisation_of_a_sequence_of_other_items_R__l_math_def}{}Cuối cùng, chúng ta định nghĩa một cách hình thức $R_{\mathrm{l}}$:
+\hypertarget{RLP_serialisation_of_a_sequence_of_other_items_R__l_math_def}{}Cuối cùng, chúng ta định nghĩa một cách chính thức $R_{\mathrm{l}}$:
 \begin{eqnarray}
 R_{\mathrm{l}}(\mathbf{x}) & \equiv & \begin{cases}
 (192 + \lVert s(\mathbf{x}) \rVert) \cdot s(\mathbf{x}) & \text{nếu} \quad s(\mathbf{x}) \neq \varnothing \wedge \lVert s(\mathbf{x}) \rVert < 56 \\
@@ -1547,14 +1547,14 @@ s(\mathbf{x}) & \equiv & \begin{cases}
 \end{cases}
 \end{eqnarray}
 
-Nếu RLP được sử dụng để mã hóa một số học, chỉ được định nghĩa là một số nguyên không âm (trong $\mathbb{N}$ hoặc trong $\mathbb{N}_x$ cho bất kỳ $x$ nào), nó phải được mã hóa dưới dạng mảng byte ngắn nhất khi được giải thích là số học. Do đó, RLP của một số nguyên không âm $i$ được định nghĩa như sau:
+Nếu RLP được sử dụng để mã hóa một giá trị vô hướng (scalar), chỉ được định nghĩa là một số nguyên không âm (thuộc $\mathbb{N}$ hoặc thuộc $\mathbb{N}_x$ với mọi $x$), nó phải được mã hóa dưới dạng mảng byte ngắn nhất khi được biểu diễn là giá trị vô hướng. Do đó, RLP của một số nguyên không âm $i$ được định nghĩa như sau:
 \begin{equation}
 \mathtt{RLP}(i : i \in \mathbb{N}) \equiv \mathtt{RLP}(\mathtt{BE}(i))
 \end{equation}
 
-Khi giải thích dữ liệu RLP, nếu một đoạn được giải mã là một số học và các chữ số 0 đầu tiên được tìm thấy trong chuỗi byte, các client được yêu cầu coi nó không cổ điển và xử lý nó giống như dữ liệu RLP không hợp lệ khác, bỏ qua hoàn toàn.
+Khi biểu diễn dữ liệu RLP, nếu một đoạn dự kiến được giải mã là một giá trị vô hướng và có các chữ số 0 đứng đầu trong chuỗi byte, các client được yêu cầu coi nó không kinh điển (non-canonical) và xử lý nó giống như dữ liệu RLP không hợp lệ khác, loại bỏ nó hoàn toàn.
 
-Không có định dạng mã hóa cụ thể cho giá trị có dấu hoặc số dấu chấm động.
+Không có định dạng mã hóa cụ thể cho giá trị có dấu hoặc giá trị dấu chấm động (số thực).
 
 \section{Mã Hóa Tiền Tố HEX (Hex-Prefix Encoding)}\label{app:hexprefix}
 Mã hóa tiền tố hex là một phương pháp hiệu quả để mã hóa một số lượng nipples bất kỳ thành một mảng byte. Nó có thể lưu trữ một cờ hiệu bổ sung, khi được sử dụng trong ngữ cảnh của trie (duy nhất trong ngữ cảnh này nó được sử dụng), làm rõ ràng giữa các loại nút.
