@@ -1557,9 +1557,9 @@ Khi biểu diễn dữ liệu RLP, nếu một đoạn dự kiến được gi�
 Không có định dạng mã hóa cụ thể cho giá trị có dấu hoặc giá trị dấu chấm động (số thực).
 
 \section{Mã Hóa Tiền Tố HEX (Hex-Prefix Encoding)}\label{app:hexprefix}
-Mã hóa tiền tố hex là một phương pháp hiệu quả để mã hóa một số lượng nipples bất kỳ thành một mảng byte. Nó có thể lưu trữ một cờ hiệu bổ sung, khi được sử dụng trong ngữ cảnh của trie (duy nhất trong ngữ cảnh này nó được sử dụng), làm rõ ràng giữa các loại nút.
+Mã hóa tiền tố hex là một phương pháp hiệu quả để mã hóa một số lượng nipples bất kỳ thành một mảng byte. Nó có thể lưu trữ một cờ bổ sung, khi được sử dụng trong ngữ cảnh của trie (ngữ cảnh duy nhất nơi nó được sử dụng), phân biệt giữa các loại nút.
 
-Nó được định nghĩa như là hàm $\mathtt{HP}$ ánh xạ từ một dãy các nibble (nữa byte/4 bits) (được biểu diễn bởi tập hợp \linkdest{set_of_sequence_of_nibbles}$\mathbb{Y}$) cùng với một giá trị boolean sang một dãy byte (được biểu diễn bởi tập hợp $\mathbb{B}$):
+Nó được định nghĩa là hàm $\mathtt{HP}$ ánh xạ từ một dãy các nibble (nữa byte/4 bits) (được biểu diễn bởi tập hợp \linkdest{set_of_sequence_of_nibbles}$\mathbb{Y}$) cùng với một giá trị boolean sang một dãy byte (được biểu diễn bởi tập hợp $\mathbb{B}$):
 
 \begin{eqnarray}
 \mathtt{HP}(\mathbf{x}, t): \mathbf{x} \in \mathbb{Y} & \equiv & \begin{cases}
@@ -1571,7 +1571,7 @@ Nó được định nghĩa như là hàm $\mathtt{HP}$ ánh xạ từ một dã
 f(t) & \equiv & \begin{cases} 2 & \text{nếu} \quad t \neq 0 \\ 0 & \text{ngược lại} \end{cases}
 \end{eqnarray}
 
-Do đó, nibble cao của byte đầu tiên chứa hai cờ hiệu; bit thấp nhất mã hóa tính chẵn lẻ của độ dài và bit thấp thứ hai mã hóa cờ $t$. Nibble thấp của byte đầu tiên là không trong trường hợp số lượng nibbles là chẵn và là nibble đầu tiên trong trường hợp số lượng nibbles là lẻ. Tất cả các nibble còn lại (bây giờ là số lẻ) vừa vặn đúng vào các byte còn lại.
+Như vậy, nibble cao của byte đầu tiên chứa hai cờ hiệu; bit thấp nhất mã hóa tính chẵn lẻ của độ dài và bit thấp thứ hai mã hóa cờ $t$. Nibble thấp của byte đầu tiên là không (zero) trong trường hợp số lượng nibbles là chẵn và là nibble đầu tiên trong trường hợp số lượng nibbles là lẻ. Tất cả các nibble còn lại (bây giờ là số chẵn) khớp đúng với các byte còn lại.
 
 \section{Cây Merkle Patricia sửa đổi}\label{app:trie}\hypertarget{trie}{}
 Cây Merkle Patricia sửa đổi (trie) cung cấp một cấu trúc dữ liệu bền để ánh xạ giữa dữ liệu nhị phân có độ dài tùy ý (mảng byte). Nó được định nghĩa dưới dạng một cấu trúc dữ liệu có thể thay đổi để ánh xạ giữa các đoạn nhị phân 256 bit và dữ liệu nhị phân có độ dài tùy ý, thường được thực hiện dưới dạng một cơ sở dữ liệu. Lõi của trie, và yêu cầu duy nhất của nó trong kịch bản đặc tả giao thức, là cung cấp một giá trị duy nhất xác định một bộ cặp khóa-giá trị đã cho, có thể là một chuỗi 32 byte hoặc chuỗi byte trống. Để hiện thực giao thức một cách hiệu quả và hiệu quả, cách lưu trữ và duy trì cấu trúc của cây được để lại là một yếu tố cần xem xét khi triển khai.
