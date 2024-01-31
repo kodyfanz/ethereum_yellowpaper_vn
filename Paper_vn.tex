@@ -1504,13 +1504,13 @@ Chúng ta định nghĩa hàm RLP là $\mathtt{RLP}$ thông qua hai hàm con, h�
 
 \begin{itemize}
 \item Nếu mảng byte chỉ chứa một byte duy nhất và byte đó nhỏ hơn 128, thì đầu vào hoàn toàn bằng đầu ra.
-\item Nếu mảng byte có ít hơn 56 byte, thì đầu ra bằng đầu vào được gắn tiền tố bởi byte có giá trị bằng với độ dài của mảng byte cộng thêm 128.
-\item Ngược lại, đầu ra bằng đầu vào, cho rằng nó có ít hơn $2^{64}$ byte, được gắn tiền tố bởi chiều dài tối thiểu của mảng byte mà khi được hiểu như một big-endian với độ dài của mảng byte đầu vào, chính nó được gắn tiền tố bởi số byte cần thiết để mã hóa giá trị độ dài này một cách trung thực cộng thêm 183.
+\item Nếu mảng byte có ít hơn 56 byte, thì đầu ra bằng đầu vào được gắn thêm tiền tố bởi byte có giá trị là độ dài của mảng byte cộng thêm 128.
+\item Ngược lại, cho rằng nó có ít hơn $2^{64}$ byte, thì đầu ra bằng đầu vào được gắn tiền tố bởi giá trị chiều dài tối thiểu của mảng byte mà khi được biểu diễn như một big-endian là độ dài của mảng byte đầu vào, tiếp theo chính nó (chính tiền tố vừa nêu) lại được gắn thêm tiền tố bởi số byte cần thiết để mã hóa giá trị độ dài này một cách trung thực cộng thêm 183.
 \end{itemize}
 
 Mảng byte chứa $2^{64}$ byte hoặc nhiều hơn không thể được mã hóa. Ràng buộc này đảm bảo rằng byte đầu tiên của việc mã hóa một mảng byte luôn dưới 192, và do đó nó có thể dễ dàng phân biệt được khỏi việc mã hóa của các chuỗi trong $\mathbb{L}$.
 
-\hypertarget{RLP_serialisation_of_a_byte_array_R__b_math_def}{}Một cách hình thức, chúng ta định nghĩa $R_{\mathrm{b}}$:
+\hypertarget{RLP_serialisation_of_a_byte_array_R__b_math_def}{}Một cách chính thức, chúng ta định nghĩa $R_{\mathrm{b}}$:
 \begin{eqnarray}
 R_{\mathrm{b}}(\mathbf{x}) & \equiv & \begin{cases}
 \mathbf{x} & \text{nếu} \quad \lVert \mathbf{x} \rVert = 1 \wedge \mathbf{x}[0] < 128 \\
