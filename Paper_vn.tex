@@ -1557,7 +1557,7 @@ Khi biểu diễn dữ liệu RLP, nếu một đoạn dự kiến được gi�
 Không có định dạng mã hóa cụ thể cho giá trị có dấu hoặc giá trị dấu chấm động (số thực).
 
 \section{Mã Hóa Tiền Tố HEX (Hex-Prefix Encoding)}\label{app:hexprefix}
-Mã hóa tiền tố hex là một phương pháp hiệu quả để mã hóa một số lượng nipples bất kỳ thành một mảng byte. Nó có thể lưu trữ một cờ bổ sung, khi được sử dụng trong ngữ cảnh của trie (ngữ cảnh duy nhất nơi nó được sử dụng), phân biệt giữa các loại nút.
+Mã hóa tiền tố hex là một phương pháp hiệu quả để mã hóa một số lượng nipples bất kỳ thành một mảng byte. Nó có thể lưu trữ một cờ bổ sung, khi được sử dụng trong ngữ cảnh của trie (ngữ cảnh duy nhất nơi nó được sử dụng) để phân biệt giữa các loại nút.
 
 Nó được định nghĩa là hàm $\mathtt{HP}$ ánh xạ từ một dãy các nibble (nữa byte/4 bits) (được biểu diễn bởi tập hợp \linkdest{set_of_sequence_of_nibbles}$\mathbb{Y}$) cùng với một giá trị boolean sang một dãy byte (được biểu diễn bởi tập hợp $\mathbb{B}$):
 
